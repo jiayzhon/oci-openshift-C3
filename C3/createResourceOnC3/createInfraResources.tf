@@ -59,15 +59,10 @@ data "oci_identity_availability_domain" "availability_domain" {
   ad_number      = "1"
 }
 
-variable "create_openshift_instance_pools" {
-  type        = bool
-  description = "If we create the instances in this round of tf apply"
-}
-
 locals {
   all_protocols                   = "all"
   anywhere                        = "0.0.0.0/0"
-  create_openshift_instance_pools = var.create_openshift_instance_pools
+  create_openshift_instance_pools = true
   pool_formatter_id               = join("", ["$", "{launchCount}"])
 }
 
