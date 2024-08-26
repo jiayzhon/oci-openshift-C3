@@ -22,7 +22,7 @@ stringData:
 ```
 
 
-`oci-ccm-C3-cert.yaml` in `oci-ccm.yml` should be replaced by the C3 cert.
+`oci-ccm-C3-cert.yaml` in `oci-ccm.yml` and `oci-csi-C3-cert.yaml` in `oci-csi.yml` should be replaced by the C3 cert.
 
 example:
 ```
