@@ -40,6 +40,19 @@ stringData:
       rateLimitQPSWrite: 20.0
       rateLimitBucketWrite: 5
 ---
+# oci-csi-C3-cert.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: c3-cert
+  namespace: oci-csi
+stringData:
+  scasg03-cert.pem: |
+    -----BEGIN CERTIFICATE-----
+    your c3 cert content
+    -----END CERTIFICATE-----
+---
 
 # oci-csi-02-controller-driver.yaml
 apiVersion: apps/v1
@@ -141,6 +154,9 @@ spec:
           command:
             - /usr/local/bin/oci-csi-controller-driver
           image: ghcr.io/davidfoster0127/cloud-provider-oci:v1.28.0
+          env:
+            - name: OCI_DEFAULT_CERTS_PATH
+              value: "/etc/pki/tls/c3/c3-cert.pem"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: config
@@ -151,6 +167,9 @@ spec:
               readOnly: true
             - mountPath: /var/run/shared-tmpfs
               name: shared-tmpfs
+            - name: cert
+              mountPath: /etc/pki/tls/c3
+              readOnly: true
       volumes:
         - name: config
           secret:
@@ -160,10 +179,11 @@ spec:
             path: /etc/kubernetes
         - name: shared-tmpfs
           emptyDir: {}
+        - name: cert
+          secret:
+            secretName: c3-cert
       dnsPolicy: ClusterFirst
       hostNetwork: true
-      imagePullSecrets:
-        - name: image-pull-secret
       restartPolicy: Always
       schedulerName: default-scheduler
       serviceAccount: csi-oci-node-sa
