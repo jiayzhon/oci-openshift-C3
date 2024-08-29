@@ -1,0 +1,33 @@
+apiVersion: v1
+metadata:
+  name: <replace with the OpenShift cluster name>
+baseDomain: <replace with the name of cluster's DNS zone>
+networking:
+  clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+  networkType: OVNKubernetes
+  machineNetwork:
+    - cidr: 10.0.0.0/16
+  serviceNetwork:
+    - 172.30.0.0/16
+compute:
+  - architecture: amd64
+    hyperthreading: Enabled
+    name: worker
+    replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+platform:
+  external:
+    platformName: oci
+    cloudControllerManager: External
+proxy:
+  httpProxy: http://www-proxy.us.oracle.com:80
+  httpsProxy: http://www-proxy.us.oracle.com:80
+  noProxy: localhost,127.0.0.1,1,2,3,4,5,6,7,8,9,0,.us.oracle.com,.ie.oracle.com,.oraclecorp.com,10.0.0.0/16
+sshKey: '<replace with your publish ssh key>'
+pullSecret: '<replace with your pull secret key generated from RH>'

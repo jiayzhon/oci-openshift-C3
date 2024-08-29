@@ -1,0 +1,6 @@
+apiVersion: v1alpha1
+metadata:
+  name: <replace with the OpenShift cluster name>
+  namespace: <replace with the OpenShift cluster name>
+rendezvousIP: 10.0.16.20
+bootArtifactsBaseURL: http://10.0.0.5

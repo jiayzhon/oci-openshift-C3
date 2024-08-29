@@ -48,6 +48,11 @@ variable "image_id_manually_created_on_C3" {
   type        = string
 }
 
+variable "create_openshift_instance_pools" {
+  type        = bool
+  description = "If the switch is true, the script will create openshift instance pools. Otherwise, it will skip the creation via tf and needs manually creation on C3. Default value is true. Flip on demand, e.g. in agent-based installations."
+}
+
 variable "enable_private_dns" {
   type        = bool
   description = "If the switch is enabled, a private DNS zone will be created, and users should edit the /etc/hosts file for resolution. Otherwise, a public DNS zone will be created based on the given domain."
@@ -62,7 +67,7 @@ data "oci_identity_availability_domain" "availability_domain" {
 locals {
   all_protocols                   = "all"
   anywhere                        = "0.0.0.0/0"
-  create_openshift_instance_pools = true
+  create_openshift_instance_pools = var.create_openshift_instance_pools
   pool_formatter_id               = join("", ["$", "{launchCount}"])
 }
 
