@@ -27,7 +27,7 @@ stringData:
 example:
 ```
 stringData:
-  scasg03-cert.pem: |
+  c3-cert.pem: |
     -----BEGIN CERTIFICATE-----
     your cert content
     -----END CERTIFICATE-----

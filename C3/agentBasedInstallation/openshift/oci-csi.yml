@@ -48,10 +48,11 @@ metadata:
   name: c3-cert
   namespace: oci-csi
 stringData:
-  scasg03-cert.pem: |
+  c3-cert.pem: |
     -----BEGIN CERTIFICATE-----
     your c3 cert content
     -----END CERTIFICATE-----
+
 ---
 
 # oci-csi-02-controller-driver.yaml
@@ -184,6 +185,8 @@ spec:
             secretName: c3-cert
       dnsPolicy: ClusterFirst
       hostNetwork: true
+      imagePullSecrets:
+        - name: image-pull-secret
       restartPolicy: Always
       schedulerName: default-scheduler
       serviceAccount: csi-oci-node-sa
