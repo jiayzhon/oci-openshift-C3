@@ -1,4 +1,4 @@
-c3_region              = "<replace with C3 tenancy_ocid>"
+c3_region              = "<replace with C3 region>"
 compartment_ocid       = "<replace with the compartment_ocid>"
 c3_region_profile_name = "<replace with the oci config profile name of the C3 region>"
 
